@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 10:21:07 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/10 10:58:09 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/10 12:02:13 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ typedef struct s_complex
 
 t_complex	sum(t_complex, t_complex);
 t_complex	multiply(t_complex, t_complex);
+t_complex	square(t_complex);
+double		modulus(t_complex);
 
 #endif
