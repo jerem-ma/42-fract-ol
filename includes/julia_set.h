@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 13:50:01 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/10 14:38:47 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/10 15:03:22 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # include "ft_complex.h"
 # include "get_sequence_speed.h"
 
-typedef struct s_julie
+typedef struct s_shiny
 {
 	t_complex	nbr;
 	int			value;
-}	t_julie;
+}	t_shiny;
 
-t_julie	*get_julia_set(t_complex *pts, int length, t_complex c);
+t_shiny	*get_julia_set(t_complex *pts, int length, t_complex c);
 #endif

@@ -6,18 +6,18 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 13:50:55 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/10 14:43:27 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/10 15:03:54 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "julia_set.h"
 
-static void	fill_julia_set(t_julie *set, t_complex *pts, int length,
+static void	fill_julia_set(t_shiny *set, t_complex *pts, int length,
 				t_complex c);
 
-t_julie	*get_julia_set(t_complex *pts, int length, t_complex c)
+t_shiny	*get_julia_set(t_complex *pts, int length, t_complex c)
 {
-	t_julie	*julia_set;
+	t_shiny	*julia_set;
 
 	julia_set = malloc(sizeof(*julia_set) * length);
 	if (!julia_set)
@@ -26,11 +26,11 @@ t_julie	*get_julia_set(t_complex *pts, int length, t_complex c)
 	return (julia_set);
 }
 
-static void	fill_julia_set(t_julie *set, t_complex *pts, int length,
+static void	fill_julia_set(t_shiny *set, t_complex *pts, int length,
 		t_complex c)
 {
 	int		i;
-	t_julie	julie;
+	t_shiny	julie;
 
 	i = 0;
 	while (i < length)
