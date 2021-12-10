@@ -1,16 +1,18 @@
-SRCS		=	
+SRCS		=	utils/ft_complex.c	utils/get_sequence_speed.c main.c
 
 SRCS_BONUS	=
 
-OBJS		=	${SRCS:.c=.o}
+OBJS		=	$(addprefix build/,${SRCS:.c=.o})
 
-OBJS_BONUS	=	${SRCS_BONUS:.c=.o}
+OBJS_BONUS	=	$(addprefix build/,${SRCS_BONUS:.c=.o})
 
 NAME		=	fractol
 
 CFLAGS		=	-Wall -Werror -Wextra
 
 INCLUDE		=	includes/
+
+LIBS		=	-lm
 
 all		:	$(NAME)
 
@@ -20,8 +22,8 @@ build/%.o	:	srcs/%.c
 	fi
 	cc ${CFLAGS} -I ${INCLUDE} -c $< -o $@ -g3
 
-$(NAME)	:	$(addprefix build/,${OBJS})
-	ar rc ${NAME} $(addprefix build/,${OBJS})
+$(NAME)	:	${OBJS}
+	 gcc ${CFLAGS} ${OBJS} ${LIBS} -o ${NAME}
 
 clean	:	
 	rm -Rf build/
@@ -31,7 +33,7 @@ fclean	:	clean
 
 re		:	fclean ${NAME}
 
-bonus	:	$(NAME) $(OBJS_BONUS)
-	ar r $(NAME) $(OBJS_BONUS)
+bonus	:	${OBJS} $(OBJS_BONUS)
+	gcc ${CFLAGS} ${LIBS} ${OBJS} ${OBJS_BONUS} -o ${NAME}
 
 .PHONY	:	all clean fclean re bonus
