@@ -16,6 +16,8 @@ INCLUDE		=	includes/
 
 LIBS		=	-lm
 
+MY_LIBS		=	libs/libft/libft.a
+
 all		:	$(NAME)
 
 build/%.o	:	srcs/%.c
@@ -24,18 +26,23 @@ build/%.o	:	srcs/%.c
 	fi
 	cc ${CFLAGS} -I ${INCLUDE} -c $< -o $@ -g3
 
-$(NAME)	:	${OBJS}
-	 gcc ${CFLAGS} ${OBJS} ${LIBS} -o ${NAME}
+libs/libft/libft.a	:
+	make -C libs/libft
 
-clean	:	
+$(NAME)	:	${MY_LIBS} ${OBJS}
+	 gcc ${CFLAGS} ${OBJS} ${MY_LIBS} ${LIBS} -o ${NAME}
+
+clean	:
 	rm -Rf build/
+	make -C libs/libft clean
 
 fclean	:	clean
 	rm -f ${NAME}
+	make -C libs/libft fclean
 
 re		:	fclean ${NAME}
 
-bonus	:	${OBJS} $(OBJS_BONUS)
+bonus	:	${MY_LIBS} ${OBJS} $(OBJS_BONUS)
 	gcc ${CFLAGS} ${LIBS} ${OBJS} ${OBJS_BONUS} -o ${NAME}
 
 .PHONY	:	all clean fclean re bonus
