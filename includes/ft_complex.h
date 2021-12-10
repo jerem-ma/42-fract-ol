@@ -6,12 +6,14 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 10:21:07 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/10 12:36:43 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/10 12:46:02 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_COMPLEX_H
 # define FT_COMPLEX_H
+
+# include <math.h>
 
 typedef struct s_complex
 {
