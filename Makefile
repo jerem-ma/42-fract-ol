@@ -14,7 +14,7 @@ CFLAGS		=	-Wall -Werror -Wextra
 
 INCLUDE		=	includes/
 
-LIBS		=	-lm
+LIBS		=	-lm -lXext -lX11
 
 MY_LIBS		=	libs/libft/libft.a libs/minilibx-linux/libmlx.a
 
