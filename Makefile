@@ -16,7 +16,7 @@ INCLUDE		=	includes/
 
 LIBS		=	-lm
 
-MY_LIBS		=	libs/libft/libft.a
+MY_LIBS		=	libs/libft/libft.a libs/minilibx-linux/libmlx.a
 
 all		:	$(NAME)
 
@@ -29,12 +29,16 @@ build/%.o	:	srcs/%.c
 libs/libft/libft.a	:
 	make -C libs/libft
 
+libs/minilibx-linux/libmlx.a	:
+	make -C libs/minilibx-linux
+
 $(NAME)	:	${MY_LIBS} ${OBJS}
 	 gcc ${CFLAGS} ${OBJS} ${MY_LIBS} ${LIBS} -o ${NAME}
 
 clean	:
 	rm -Rf build/
 	make -C libs/libft clean
+	make -C libs/minilibx-linux clean
 
 fclean	:	clean
 	rm -f ${NAME}
