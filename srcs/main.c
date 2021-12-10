@@ -6,14 +6,11 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:47:02 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/10 18:05:43 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/10 18:30:00 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-static int	are_args_valid(int ac, char **av);
-static void	print_help(void);
-static int	is_float(char *str);
+#include "main.h"
 
 int	main(int ac, char **av)
 {
@@ -22,8 +19,7 @@ int	main(int ac, char **av)
 		print_help();
 		return (1);
 	}
-//	start_fractol(ac, av);
-	return (0);
+	return (start_fractol(ac, av));
 }
 
 static int	are_args_valid(int ac, char **av)

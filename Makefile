@@ -1,6 +1,6 @@
 SRCS		=	utils/ft_complex.c	utils/get_sequence_speed.c \
 				utils/ft_arrays.c \
-				julia_set.c main.c
+				julia_set.c fractol.c main.c
 
 SRCS_BONUS	=
 
