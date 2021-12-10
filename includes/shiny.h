@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia_set.h                                        :+:      :+:    :+:   */
+/*   shiny.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 13:50:01 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/10 15:11:02 by jmaia            ###   ########.fr       */
+/*   Created: 2021/12/10 15:10:03 by jmaia             #+#    #+#             */
+/*   Updated: 2021/12/10 15:10:56 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef JULIA_SET_H
-# define JULIA_SET_H
+#ifndef SHINY_H
+# define SHINY_H
 
-# include <stdlib.h>
+typedef struct s_shiny
+{
+	t_complex	nbr;
+	int			value;
+}	t_shiny;
 
-# include "ft_complex.h"
-# include "get_sequence_speed.h"
-# include "shiny.h"
-
-t_shiny	*get_julia_set(t_complex *pts, int length, t_complex c);
 #endif
