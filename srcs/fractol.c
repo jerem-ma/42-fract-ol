@@ -6,20 +6,21 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:09:51 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/13 13:29:03 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/13 14:04:24 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+static void	init_fract_data(t_fract_data *data, char **av);
 static int	key_hook(int keycode, t_mlx_backpack *mlx_bp);
 
 int	start_fractol(int ac, char **av)
 {
 	t_mlx_backpack	mlx_bp;
+	t_fract_data	fract_data;
 
 	(void) ac;
-	(void) av;
 	mlx_bp.mlx_ptr = mlx_init();
 	if (!mlx_bp.mlx_ptr)
 		return (1);
@@ -29,10 +30,24 @@ int	start_fractol(int ac, char **av)
 		destroy_everything(&mlx_bp);
 		return (2);
 	}
+	init_fract_data(&fract_data, av);
 	mlx_key_hook(mlx_bp.window_ptr, key_hook, &mlx_bp);
+//	draw_fractal(&mlx_bp, ac, av);
 	mlx_loop(mlx_bp.mlx_ptr);
 	destroy_everything(&mlx_bp);
 	return (0);
+}
+
+static void	init_fract_data(t_fract_data *data, char **av)
+{
+	if (!ft_strncmp(av[1], "mandelbrot", 11))
+		data->type = mandelbrot;
+	else if (!ft_strncmp(av[1], "julia", 6))
+	{
+		data->type = julia;
+		data->c.x = parse_double(av[2]);
+		data->c.y = parse_double(av[3]);
+	}
 }
 
 static int	key_hook(int keycode, t_mlx_backpack *mlx_bp)

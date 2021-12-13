@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:47:02 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/10 19:08:37 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/13 14:00:03 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,6 @@ static int	are_args_valid(int ac, char **av)
 		return (1);
 	}
 	return (0);
-}
-
-static int	is_float(char *str)
-{
-	int	i;
-	int	part;
-
-	i = 0;
-	part = 0;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-		{
-			if (str[i] != '.' || part == 1)
-				return (0);
-			part = 1;
-		}
-		i++;
-	}
-	return (1);
 }
 
 static void	print_help(void)
