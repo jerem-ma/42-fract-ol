@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:09:51 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/10 19:15:34 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/13 10:35:21 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	start_fractol(int ac, char **av)
 	mlx_destroy_display(mlx_ptr);
 	(void) ac;
 	(void) av;
+	free(mlx_ptr);
 	return (0);
 }
