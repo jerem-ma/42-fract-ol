@@ -6,11 +6,13 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:09:51 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/13 12:12:14 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/13 13:29:03 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+static int	key_hook(int keycode, t_mlx_backpack *mlx_bp);
 
 int	start_fractol(int ac, char **av)
 {
@@ -35,7 +37,7 @@ int	start_fractol(int ac, char **av)
 
 static int	key_hook(int keycode, t_mlx_backpack *mlx_bp)
 {
-	if (keycode == 65307)
+	if (keycode == ECHAP_KEY)
 	{
 		printf("Exiting program...\n");
 		mlx_loop_end(mlx_bp->mlx_ptr);
