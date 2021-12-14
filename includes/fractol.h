@@ -6,14 +6,15 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:28:49 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/14 10:53:55 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/14 11:57:41 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# define WIDTH 1024
-# define HEIGHT 768
+# define SIZE 400
+# define WIDTH SIZE
+# define HEIGHT SIZE
 # define TITLE "fract-ol"
 
 # include <stdio.h>
