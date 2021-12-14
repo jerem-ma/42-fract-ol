@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:37 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/14 12:05:30 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/14 12:45:47 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	draw_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 		x = 0;
 		while (x < SIZE)
 		{
-			printf("%f\n", set[y * SIZE + x].value == -1 ? 0 : (set[y * SIZE + x].value - 50) / 100.0 * 255); 
+//			printf("%f\n", set[y * SIZE + x].value == -1 ? 0 : (set[y * SIZE + x].value - 50) / 100.0 * 255); 
 			buffer[(y * SIZE + x)] = (((int) (set[y * SIZE + x].value == -1 ? 0 : (set[y * SIZE + x].value - 50) / 100.0 * 255)) << 4) + ((int) (set[y * SIZE + x].value == -1 ? 0 : (set[y * SIZE + x].value - 50) / 100.0 * 255) << 2) + set[y * SIZE + x].value == -1 ? 0 : (set[y * SIZE + x].value - 50) / 100.0 * 255;
 //			buffer[(y * SIZE + x) * 4 + 1] = set[y * SIZE + x].value == -1 ? 0 : (set[y * SIZE + x].value - 50) / 100.0 * 255; 
 //			buffer[(y * SIZE + x) * 4 + 2] = set[y * SIZE + x].value == -1 ? 0 : (set[y * SIZE + x].value - 50) / 100.0 * 255; 
@@ -50,6 +50,7 @@ void	draw_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 		}
 		y++;
 	}
+	printf("%f %f\n", fract_data->c.x, fract_data->c.y);
 	mlx_put_image_to_window(mlx_bp->mlx_ptr, mlx_bp->window_ptr, image, 0, 0);
 	(void) mlx_bp;
 	(void) fract_data;
