@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 10:52:17 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/14 11:46:19 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/14 16:48:17 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	get_sequence_speed(t_complex u0, t_complex c)
 	n = 0;
 	is_finite = 1;
 	un = u0;
-	while (n < 100 && is_finite)
+	while (n < MAX_SPEED && is_finite)
 	{
 		un = sum(square(un), c);
 		if (modulus(un) > 2)
