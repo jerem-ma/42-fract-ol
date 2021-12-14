@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:09:51 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/14 10:51:06 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/14 11:20:56 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	start_fractol(int ac, char **av)
 		return (2);
 	}
 	init_fract_data(&fract_data, av);
-	mlx_key_hook(mlx_bp.window_ptr, key_hook, &mlx_bp);
 	draw_fractal(&mlx_bp, &fract_data);
+	mlx_key_hook(mlx_bp.window_ptr, key_hook, &mlx_bp);
 	mlx_loop(mlx_bp.mlx_ptr);
 	destroy_everything(&mlx_bp);
 	return (0);
