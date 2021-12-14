@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:37 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/14 12:45:47 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/14 16:04:14 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 #include "shiny.h"
 #include "julia_set.h"
+
+static void	fill_pts(t_complex *pts, t_fract_data *data, int width, int height);
 
 void	draw_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 {
@@ -25,13 +27,7 @@ void	draw_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 	t_shiny	*set;
 	t_complex	pts[SIZE * SIZE];
 
-	for (int y1 = 0; y1 < SIZE; y1++)
-	{
-		for (int x1 = 0; x1 < SIZE; x1++)
-		{
-			pts[y1 * SIZE + x1] = (t_complex) {.x = (x1 - SIZE / 2.0) / SIZE * 2, .y = (y1 - SIZE / 2.0) / SIZE * 2};
-		}
-	}
+	fill_pts(pts, fract_data, SIZE, SIZE);
 	set = get_julia_set(pts, SIZE * SIZE, fract_data->c);
 	y = 0;
 	image = mlx_new_image(mlx_bp->mlx_ptr, SIZE, SIZE);
@@ -54,4 +50,25 @@ void	draw_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 	mlx_put_image_to_window(mlx_bp->mlx_ptr, mlx_bp->window_ptr, image, 0, 0);
 	(void) mlx_bp;
 	(void) fract_data;
+}
+
+static void	fill_pts(t_complex *pts, t_fract_data *data, int width, int height)
+{
+	int			x;
+	int			y;
+	t_complex	point;
+
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		point.y = (1.0 * y / height * (data->max - data->min)) + data->min;
+		while (x < width)
+		{
+			point.x = (1.0 * x / width * (data->max - data->min)) + data->min;
+			pts[y * width + x] = point;
+			x++;
+		}
+		y++;
+	}
 }
