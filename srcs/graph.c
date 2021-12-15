@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:37 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/14 19:27:41 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/15 18:04:51 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static int	get_color(int speed, int max_speed);
 
 void	draw_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 {
-	int			x;
-	int			y;
+	t_complex	screen;
 	void		*image;
 	int			*buffer;
 	t_shiny		*set;
@@ -29,23 +28,22 @@ void	draw_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 
 	fill_pts(pts, fract_data, SIZE, SIZE);
 	set = get_julia_set(pts, SIZE * SIZE, fract_data->c);
-	y = 0;
+	screen.y = 0;
 	image = mlx_new_image(mlx_bp->mlx_ptr, SIZE, SIZE);
-	buffer = (int *) mlx_get_data_addr(image, &x, &x, &x);
-	while (y < SIZE)
+	buffer = (int *)mlx_get_data_addr(image, (int *)&screen.x,
+			(int *)&screen.x, (int *)&screen.x);
+	while (screen.y < SIZE)
 	{
-		x = 0;
-		while (x < SIZE)
+		screen.x = 0;
+		while (screen.x < SIZE)
 		{
-			buffer[y * SIZE + x] = get_color(set[y * SIZE + x].value,
-					MAX_SPEED);
-			x++;
+			buffer[(int)(screen.y * SIZE + screen.x)] = get_color(
+					set[(int)(screen.y * SIZE + screen.x)].value, MAX_SPEED);
+			screen.x++;
 		}
-		y++;
+		screen.y++;
 	}
 	mlx_put_image_to_window(mlx_bp->mlx_ptr, mlx_bp->window_ptr, image, 0, 0);
-	(void) mlx_bp;
-	(void) fract_data;
 }
 
 static void	fill_pts(t_complex *pts, t_fract_data *data, int width, int height)
@@ -79,6 +77,7 @@ static int	get_color(int speed, int max_speed)
 		return (0xFF000000);
 	color = 0;
 	base_color = 255 - 1.0 / speed * 255;
+	speed += 0;
 	if (speed % 60 < 20)
 	{
 		color += (int)(255 - speed % 60 / 20.0 * 255) << 24;
