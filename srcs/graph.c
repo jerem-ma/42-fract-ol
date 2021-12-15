@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:37 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/15 18:04:51 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/15 18:19:54 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 #include "shiny.h"
 #include "julia_set.h"
 
-static void	fill_pts(t_complex *pts, t_fract_data *data, int width, int height);
+static void	fill_pts(t_complex pts[], t_fract_data *data, int width, int height);
 static int	get_color(int speed, int max_speed);
+static void	clean_set_and_image(void *set, void *image, void *mlx_ptr);
 
 void	draw_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 {
@@ -44,6 +45,13 @@ void	draw_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 		screen.y++;
 	}
 	mlx_put_image_to_window(mlx_bp->mlx_ptr, mlx_bp->window_ptr, image, 0, 0);
+	clean_set_and_image(set, image, mlx_bp->mlx_ptr);
+}
+
+static void	clean_set_and_image(void *set, void *image, void *mlx_ptr)
+{
+	free(set);
+	mlx_destroy_image(mlx_ptr, image);
 }
 
 static void	fill_pts(t_complex *pts, t_fract_data *data, int width, int height)

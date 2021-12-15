@@ -26,7 +26,7 @@ build/%.o	:	srcs/%.c
 	@if [ ! -d $(dir $@) ]; then\
 		mkdir -p $(dir $@);\
 	fi
-	cc ${CFLAGS} -I ${INCLUDE} -fsanitize=address -D MAX_SPEED=$(MAX_SPEED) -c $< -o $@ -g3
+	cc ${CFLAGS} -I ${INCLUDE} -D MAX_SPEED=$(MAX_SPEED) -c $< -o $@ -g3
 
 libs/libft/libft.a	:
 	make -C libs/libft
@@ -35,7 +35,7 @@ libs/minilibx-linux/libmlx.a	:
 	make -C libs/minilibx-linux
 
 $(NAME)	:	${MY_LIBS} ${OBJS}
-	 gcc ${CFLAGS} ${OBJS} ${MY_LIBS} ${LIBS} -fsanitize=address -o ${NAME}
+	 gcc ${CFLAGS} ${OBJS} ${MY_LIBS} ${LIBS} -o ${NAME}
 
 clean	:
 	rm -Rf build/
