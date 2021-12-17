@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:09:51 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/17 15:50:47 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/17 17:41:46 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static void	init_fract_data(t_fract_data *data, char **av)
 		data->c.x = parse_double(av[2]);
 		data->c.y = parse_double(av[3]);
 	}
-	data->min = -2;
-	data->max = 2;
+	data->min = (t_complex) {.x = -2, .y = -2};
+	data->max = (t_complex) {.x = 2, .y = 2};
 }
 
 static int	key_hook(int keycode, t_mlx_backpack *mlx_bp)
@@ -66,26 +66,54 @@ static int	key_hook(int keycode, t_mlx_backpack *mlx_bp)
 	return (0);
 }
 
-static int	mouse_hook(int button, int x, int y, void **params)
+static int	mouse_hook(int button, int xx, int yy, void **params)
 {
 	t_mlx_backpack	*mlx_bp;
 	t_fract_data	*data;
+	double			x;
+	double			y;
 
+	x = xx;
+	y = yy;
 	mlx_bp = params[0];
 	data = params[1];
-	(void) x;
-	(void) y;
 	if (button == ZOOM_IN_KEY || button == ZOOM_OUT_KEY)
 	{
+//		if (button == ZOOM_IN_KEY)
+//		{
+//			data->min.x += (data->max.x - data->min.x) / 8 * x / WIDTH;
+//			data->min.y += (data->max.y - data->min.y) / 8 * y / HEIGHT;
+//			data->max.x -= (data->max.x - data->min.x) / 8 * (1 - x / WIDTH);
+//			data->max.y -= (data->max.y - data->min.y) / 8 * (1 - y / HEIGHT);
+//		}
+//		else
+//		{
+//			data->min.x -= (data->max.x - data->min.x) / 8 * (1 - x / WIDTH);
+//			data->min.y -= (data->max.y - data->min.y) / 8 * (1 - y / HEIGHT);
+//			data->max.x += (data->max.x - data->min.x) / 8 * (1 - x / WIDTH);
+//			data->max.y += (data->max.y - data->min.y) / 8 * (1 - y / HEIGHT);
+//		}
 		if (button == ZOOM_IN_KEY)
 		{
-			data->min += (data->max - data->min) / 4;
-			data->max -= (data->max - data->min) / 4;
+			double len_x = data->max.x - data->min.x;
+			double n_len_x = len_x / 2;
+			double len_y = data->max.y - data->min.y;
+			double n_len_y = len_y / 2;
+			data->min.x += len_x * x / WIDTH - n_len_x * x / WIDTH;
+			data->min.y += len_y * y / HEIGHT - n_len_y * y / HEIGHT;
+			data->max.x -= len_x * (1 - x / WIDTH) - n_len_x * (1 - x / WIDTH);
+			data->max.y -= len_y * (1 - y / HEIGHT) - n_len_y * (1 - y / HEIGHT);
 		}
 		else
 		{
-			data->min -= (data->max - data->min) / 2;
-			data->max += (data->max - data->min) / 2;
+			double len_x = data->max.x - data->min.x;
+			double n_len_x = len_x * 2;
+			double len_y = data->max.y - data->min.y;
+			double n_len_y = len_y * 2;
+			data->min.x += len_x * x / WIDTH - n_len_x * x / WIDTH;
+			data->min.y += len_y * y / HEIGHT - n_len_y * y / HEIGHT;
+			data->max.x -= len_x * (1 - x / WIDTH) - n_len_x * (1 - x / WIDTH);
+			data->max.y -= len_y * (1 - y / HEIGHT) - n_len_y * (1 - y / HEIGHT);
 		}
 		draw_fractal(mlx_bp, data);
 	}

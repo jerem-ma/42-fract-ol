@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:37 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/17 12:38:01 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/17 16:12:18 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ static void	fill_pts(t_complex *pts, t_fract_data *data, int width, int height)
 	while (y < height)
 	{
 		x = 0;
-		point.y = (1.0 * y / height * (data->max - data->min)) + data->min;
+		point.y = ((data->max.y - data->min.y) * y / height) + data->min.y;
 		while (x < width)
 		{
-			point.x = (1.0 * x / width * (data->max - data->min)) + data->min;
+			point.x = ((data->max.x - data->min.x) * x / width) + data->min.x;
 			pts[y * width + x] = point;
 			x++;
 		}
@@ -90,6 +90,8 @@ static int	get_color(int speed, int max_speed)
 	int	base_color;
 
 	(void) max_speed;
+	if (speed > 450)
+		printf("%d\n", speed);
 	if (speed == -1)
 		return (0xFF000000);
 	color = 0;

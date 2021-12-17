@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:53:33 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/17 14:12:54 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/17 15:58:33 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct s_fract_data
 {
 	t_fractal_type	type;
 	t_complex		c;
-	double			min;
-	double			max;
+	t_complex		min;
+	t_complex		max;
 }	t_fract_data;
 
 #endif
