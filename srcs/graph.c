@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:37 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/17 16:12:18 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/17 18:12:42 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static void	fill_pts(t_complex pts[], t_fract_data *data, int width,
 				int height);
-static int	get_color(int speed, int max_speed);
+static int	get_color(int speed);
 static void	clean_set_and_image(void *set, void *image, void *mlx_ptr);
 
 void	draw_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
@@ -48,7 +48,7 @@ void	draw_julia_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 		while (screen.x < SIZE)
 		{
 			buffer[(int)(screen.y * SIZE + screen.x)] = get_color(
-					set[(int)(screen.y * SIZE + screen.x)].value, MAX_SPEED);
+					set[(int)(screen.y * SIZE + screen.x)].value);
 			screen.x++;
 		}
 		screen.y++;
@@ -84,14 +84,11 @@ static void	fill_pts(t_complex *pts, t_fract_data *data, int width, int height)
 	}
 }
 
-static int	get_color(int speed, int max_speed)
+static int	get_color(int speed)
 {
 	int	color;
 	int	base_color;
 
-	(void) max_speed;
-	if (speed > 450)
-		printf("%d\n", speed);
 	if (speed == -1)
 		return (0xFF000000);
 	color = 0;
