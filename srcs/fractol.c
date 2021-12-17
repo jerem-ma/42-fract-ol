@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:09:51 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/17 12:46:32 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/17 15:50:47 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 static void	init_fract_data(t_fract_data *data, char **av);
 static int	key_hook(int keycode, t_mlx_backpack *mlx_bp);
+static int	mouse_hook(int button, int x, int y, void **params);
 
 int	start_fractol(char **av)
 {
 	t_mlx_backpack	mlx_bp;
 	t_fract_data	fract_data;
+	void			*hook_params[2];
 
 	mlx_bp.mlx_ptr = mlx_init();
 	if (!mlx_bp.mlx_ptr)
@@ -31,7 +33,10 @@ int	start_fractol(char **av)
 	}
 	init_fract_data(&fract_data, av);
 	draw_fractal(&mlx_bp, &fract_data);
+	hook_params[0] = &mlx_bp;
+	hook_params[1] = &fract_data;
 	mlx_key_hook(mlx_bp.window_ptr, key_hook, &mlx_bp);
+	mlx_mouse_hook(mlx_bp.window_ptr, mouse_hook, hook_params);
 	mlx_loop(mlx_bp.mlx_ptr);
 	destroy_everything(&mlx_bp);
 	return (0);
@@ -57,6 +62,32 @@ static int	key_hook(int keycode, t_mlx_backpack *mlx_bp)
 	{
 		printf("Exiting program...\n");
 		mlx_loop_end(mlx_bp->mlx_ptr);
+	}
+	return (0);
+}
+
+static int	mouse_hook(int button, int x, int y, void **params)
+{
+	t_mlx_backpack	*mlx_bp;
+	t_fract_data	*data;
+
+	mlx_bp = params[0];
+	data = params[1];
+	(void) x;
+	(void) y;
+	if (button == ZOOM_IN_KEY || button == ZOOM_OUT_KEY)
+	{
+		if (button == ZOOM_IN_KEY)
+		{
+			data->min += (data->max - data->min) / 4;
+			data->max -= (data->max - data->min) / 4;
+		}
+		else
+		{
+			data->min -= (data->max - data->min) / 2;
+			data->max += (data->max - data->min) / 2;
+		}
+		draw_fractal(mlx_bp, data);
 	}
 	return (0);
 }
