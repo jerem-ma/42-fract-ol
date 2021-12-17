@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:09:51 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/17 18:19:03 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/17 18:22:02 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ static int	mouse_hook(int button, int xx, int yy, void **params)
 	{
 		len = data->max.x - data->min.x;
 		if (button == ZOOM_IN_KEY)
-			n_len = len / 2;
+			n_len = len / 1.2;
 		else
-			n_len = len * 2;
+			n_len = len * 1.2;
 		data->min.x += mouse.x / WIDTH * (len - n_len);
 		data->min.y += mouse.y / HEIGHT * (len - n_len);
 		data->max.x -= (1 - mouse.x / WIDTH) * (len - n_len);
