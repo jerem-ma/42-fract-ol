@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_sequence_speed.c                               :+:      :+:    :+:   */
+/*   buffer_convert.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 10:52:17 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/20 12:15:35 by jmaia            ###   ########.fr       */
+/*   Created: 2021/12/02 11:22:25 by jmaia             #+#    #+#             */
+/*   Updated: 2021/12/06 17:38:38 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_complex.h"
+#include "buffer_convert.h"
 
-int	get_sequence_speed(t_complex u0, t_complex c)
+char	*as_str(t_dynamic_buffer *buffer)
 {
-	t_complex	un;
-	int			is_finite;
-	int			n;
+	char	*str;
+	size_t	len;
 
-	n = 0;
-	is_finite = 1;
-	un = u0;
-	while (n < MAX_SPEED && is_finite)
-	{
-		un = sum(square(un), c);
-		if (modulus(un) > 2)
-			is_finite = 0;
-		n++;
-	}
-	if (is_finite)
-		n = -1;
-	return (n);
+	len = buffer->elem_size * buffer->i;
+	str = malloc(sizeof(*str) * (len + 1));
+	if (!str)
+		return (0);
+	ft_memcpy(str, buffer->buffer, sizeof(*str) * len);
+	str[len] = 0;
+	return (str);
 }

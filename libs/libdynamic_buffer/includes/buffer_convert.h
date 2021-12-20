@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_sequence_speed.c                               :+:      :+:    :+:   */
+/*   buffer_convert.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 10:52:17 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/20 12:15:35 by jmaia            ###   ########.fr       */
+/*   Created: 2021/12/06 17:37:17 by jmaia             #+#    #+#             */
+/*   Updated: 2021/12/06 17:39:11 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_complex.h"
+#ifndef BUFFER_CONVERT_H
+# define BUFFER_CONVERT_H
 
-int	get_sequence_speed(t_complex u0, t_complex c)
-{
-	t_complex	un;
-	int			is_finite;
-	int			n;
+# include <stdlib.h>
 
-	n = 0;
-	is_finite = 1;
-	un = u0;
-	while (n < MAX_SPEED && is_finite)
-	{
-		un = sum(square(un), c);
-		if (modulus(un) > 2)
-			is_finite = 0;
-		n++;
-	}
-	if (is_finite)
-		n = -1;
-	return (n);
-}
+# include "libdynamic_buffer.h"
+# include "libft.h"
+
+#endif

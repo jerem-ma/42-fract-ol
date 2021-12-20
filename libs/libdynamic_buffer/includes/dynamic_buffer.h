@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_sequence_speed.c                               :+:      :+:    :+:   */
+/*   dynamic_buffer.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 10:52:17 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/20 12:15:35 by jmaia            ###   ########.fr       */
+/*   Created: 2021/12/03 11:09:40 by jmaia             #+#    #+#             */
+/*   Updated: 2021/12/03 11:17:13 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_complex.h"
+#ifndef DYNAMIC_BUFFER_H
+# define DYNAMIC_BUFFER_H
+# define EXPAND_LEN 10
+# include <stdlib.h>
 
-int	get_sequence_speed(t_complex u0, t_complex c)
-{
-	t_complex	un;
-	int			is_finite;
-	int			n;
+# include "libft.h"
+# include "libdynamic_buffer.h"
 
-	n = 0;
-	is_finite = 1;
-	un = u0;
-	while (n < MAX_SPEED && is_finite)
-	{
-		un = sum(square(un), c);
-		if (modulus(un) > 2)
-			is_finite = 0;
-		n++;
-	}
-	if (is_finite)
-		n = -1;
-	return (n);
-}
+static void			*get_elem_ptr(t_dynamic_buffer *buffer, unsigned long i);
+static int			expand(t_dynamic_buffer *buffer);
+#endif
