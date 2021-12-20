@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:28:49 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/14 17:05:20 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/17 12:47:10 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@
 # include "graph.h"
 # include "types.h"
 
-int			start_fractol(int ac, char **av);
+int			start_fractol(char **av);
 
 #endif

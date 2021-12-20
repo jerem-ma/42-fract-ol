@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:37 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/17 12:38:01 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/17 18:12:42 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static void	fill_pts(t_complex pts[], t_fract_data *data, int width,
 				int height);
-static int	get_color(int speed, int max_speed);
+static int	get_color(int speed);
 static void	clean_set_and_image(void *set, void *image, void *mlx_ptr);
 
 void	draw_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
@@ -48,7 +48,7 @@ void	draw_julia_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 		while (screen.x < SIZE)
 		{
 			buffer[(int)(screen.y * SIZE + screen.x)] = get_color(
-					set[(int)(screen.y * SIZE + screen.x)].value, MAX_SPEED);
+					set[(int)(screen.y * SIZE + screen.x)].value);
 			screen.x++;
 		}
 		screen.y++;
@@ -73,10 +73,10 @@ static void	fill_pts(t_complex *pts, t_fract_data *data, int width, int height)
 	while (y < height)
 	{
 		x = 0;
-		point.y = (1.0 * y / height * (data->max - data->min)) + data->min;
+		point.y = ((data->max.y - data->min.y) * y / height) + data->min.y;
 		while (x < width)
 		{
-			point.x = (1.0 * x / width * (data->max - data->min)) + data->min;
+			point.x = ((data->max.x - data->min.x) * x / width) + data->min.x;
 			pts[y * width + x] = point;
 			x++;
 		}
@@ -84,12 +84,11 @@ static void	fill_pts(t_complex *pts, t_fract_data *data, int width, int height)
 	}
 }
 
-static int	get_color(int speed, int max_speed)
+static int	get_color(int speed)
 {
 	int	color;
 	int	base_color;
 
-	(void) max_speed;
 	if (speed == -1)
 		return (0xFF000000);
 	color = 0;
