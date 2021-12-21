@@ -18,7 +18,7 @@ LIBS		=	-lm -lXext -lX11
 
 MY_LIBS		=	libs/libft/libft.a libs/minilibx-linux/libmlx.a
 
-MAX_SPEED	=	10000
+MAX_SPEED	=	30
 
 all		:	$(NAME)
 

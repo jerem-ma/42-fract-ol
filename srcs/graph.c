@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:37 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/20 12:15:44 by jmaia            ###   ########.fr       */
+/*   Updated: 2021/12/21 16:32:22 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,26 @@ void	draw_julia_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 	void		*image;
 	int			*buffer;
 	t_shiny		*set;
-	t_complex	pts[SIZE * SIZE];
+	t_complex	pts[SIZE * SIZE / 4];
 
-	fill_pts(pts, fract_data, SIZE, SIZE);
-	set = get_julia_set(pts, SIZE * SIZE, fract_data->c);
+	fill_pts(pts, fract_data, SIZE / 2, SIZE / 2);
+	set = get_julia_set(pts, SIZE * SIZE / 4, fract_data->c);
 	screen.y = 0;
-	image = mlx_new_image(mlx_bp->mlx_ptr, SIZE, SIZE);
+	image = mlx_new_image(mlx_bp->mlx_ptr, SIZE / 2, SIZE / 2);
 	buffer = (int *)mlx_get_data_addr(image, (int *)&screen.x,
 			(int *)&screen.x, (int *)&screen.x);
-	while (screen.y < SIZE)
+	while (screen.y < SIZE / 2)
 	{
 		screen.x = 0;
-		while (screen.x < SIZE)
+		while (screen.x < SIZE / 2)
 		{
-			buffer[(int)(screen.y * SIZE + screen.x)] = get_color(
-					set[(int)(screen.y * SIZE + screen.x)].value);
+			buffer[(int)(screen.y * SIZE / 2 + screen.x)] = get_color(
+					set[(int)(screen.y * SIZE / 2 + screen.x)].value);
 			screen.x++;
 		}
 		screen.y++;
 	}
+	image = zoom(mlx_bp, image, 2);
 	mlx_put_image_to_window(mlx_bp->mlx_ptr, mlx_bp->window_ptr, image, 0, 0);
 	clean_set_and_image(set, image, mlx_bp->mlx_ptr);
 }
