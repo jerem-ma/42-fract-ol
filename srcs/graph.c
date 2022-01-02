@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:37 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/20 12:15:44 by jmaia            ###   ########.fr       */
+/*   Updated: 2022/01/02 16:17:40 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,10 @@ static void	fill_pts(t_complex *pts, t_fract_data *data, int width, int height)
 static int	get_color(int speed)
 {
 	int	color;
-	int	base_color;
 
 	if (speed == -1)
 		return (0xFF000000);
 	color = 0;
-	base_color = 255 - 1.0 / speed * 255;
 	if (speed % 60 < 20)
 	{
 		color += (int)(255 - speed % 60 / 20.0 * 255) << 16;
