@@ -18,7 +18,7 @@ LIBS		=	-lm -lXext -lX11
 
 MY_LIBS		=	libs/libft/libft.a libs/minilibx-linux/libmlx.a
 
-MAX_SPEED	=	10000
+MAX_SPEED	=	40
 
 all		:	$(NAME)
 
@@ -26,7 +26,7 @@ build/%.o	:	srcs/%.c
 	@if [ ! -d $(dir $@) ]; then\
 		mkdir -p $(dir $@);\
 	fi
-	cc ${CFLAGS} -I ${INCLUDE} -D MAX_SPEED=$(MAX_SPEED) -c $< -o $@ -g3
+	cc ${CFLAGS} -I ${INCLUDE} -D MAX_SPEED=$(MAX_SPEED) -c $< -o $@ -pg -O3
 
 libs/libft/libft.a	:
 	make -C libs/libft
@@ -35,7 +35,7 @@ libs/minilibx-linux/libmlx.a	:
 	make -C libs/minilibx-linux
 
 $(NAME)	:	${MY_LIBS} ${OBJS}
-	 gcc ${CFLAGS} ${OBJS} ${MY_LIBS} ${LIBS} -o ${NAME}
+	 gcc ${CFLAGS} ${OBJS} ${MY_LIBS} ${LIBS} -o ${NAME} -pg -O3
 
 clean	:
 	rm -Rf build/
