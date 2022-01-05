@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:37 by jmaia             #+#    #+#             */
-/*   Updated: 2022/01/02 19:30:42 by jmaia            ###   ########.fr       */
+/*   Updated: 2022/01/05 13:13:52 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,12 @@ static int	get_color(int speed)
 	}
 	else if (speed % 60 < 40)
 	{
-		color += (int)(255 - speed % 60 / 20.0 * 255) << 8;
+		color += (int)(255 - (speed - 20) % 60 / 20.0 * 255) << 8;
 		color += (int)((speed - 20) % 60 / 20.0 * 255);
 	}
 	else
 	{
-		color += (int)(255 - speed % 60 / 20.0 * 255);
+		color += (int)(255 - (speed - 40) % 60 / 20.0 * 255);
 		color += (int)((speed - 40) % 60 / 20.0 * 255) << 16;
 	}
 	return (color);
