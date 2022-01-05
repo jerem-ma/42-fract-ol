@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 13:50:55 by jmaia             #+#    #+#             */
-/*   Updated: 2022/01/05 15:55:34 by jmaia            ###   ########.fr       */
+/*   Updated: 2022/01/05 15:57:03 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ t_shiny	*get_set(t_complex *pts, int length, t_fract_data *data)
 	fill_set(set, pts, length, data);
 	return (set);
 }
-
-#include <stdio.h>
 
 static void	fill_set(t_shiny *set, t_complex *pts, int length,
 		t_fract_data *data)
