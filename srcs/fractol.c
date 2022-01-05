@@ -6,15 +6,16 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:09:51 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/17 18:22:02 by jmaia            ###   ########.fr       */
+/*   Updated: 2022/01/05 14:59:32 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 static void	init_fract_data(t_fract_data *data, char **av);
-static int	key_hook(int keycode, t_mlx_backpack *mlx_bp);
+static int	key_hook(int keycode, void **params);
 static int	mouse_hook(int button, int x, int y, void **params);
+static void	move(int keycode, t_fract_data *data, t_mlx_backpack *mlx_bp);
 
 int	start_fractol(char **av)
 {
@@ -35,7 +36,7 @@ int	start_fractol(char **av)
 	draw_fractal(&mlx_bp, &fract_data);
 	hook_params[0] = &mlx_bp;
 	hook_params[1] = &fract_data;
-	mlx_key_hook(mlx_bp.window_ptr, key_hook, &mlx_bp);
+	mlx_key_hook(mlx_bp.window_ptr, key_hook, hook_params);
 	mlx_mouse_hook(mlx_bp.window_ptr, mouse_hook, hook_params);
 	mlx_loop(mlx_bp.mlx_ptr);
 	destroy_everything(&mlx_bp);
@@ -56,14 +57,42 @@ static void	init_fract_data(t_fract_data *data, char **av)
 	data->max = (t_complex){.x = 2, .y = 2};
 }
 
-static int	key_hook(int keycode, t_mlx_backpack *mlx_bp)
+static int	key_hook(int keycode, void **params)
 {
+	t_mlx_backpack	*mlx_bp;
+	t_fract_data	*data;
+
+	mlx_bp = params[0];
+	data = params[1];
 	if (keycode == ECHAP_KEY)
 	{
 		printf("Exiting program...\n");
 		mlx_loop_end(mlx_bp->mlx_ptr);
 	}
+	else if (keycode >= LEFT_KEY && keycode <= DOWN_KEY)
+		move(keycode, data, mlx_bp);
 	return (0);
+}
+
+static void	move(int keycode, t_fract_data *data, t_mlx_backpack *mlx_bp)
+{
+	double			shift;
+
+	if (keycode == LEFT_KEY || keycode == RIGHT_KEY)
+	{
+		shift = (data->max.x - data->min.x) * 0.1;
+		shift *= (keycode == LEFT_KEY) * -1 + (keycode == RIGHT_KEY) * 1;
+		data->min.x += shift;
+		data->max.x += shift;
+	}
+	else if (keycode == DOWN_KEY || keycode == UP_KEY)
+	{
+		shift = (data->max.y - data->min.y) * 0.1;
+		shift *= (keycode == UP_KEY) * -1 + (keycode == DOWN_KEY) * 1;
+		data->min.y += shift;
+		data->max.y += shift;
+	}
+	draw_fractal(mlx_bp, data);
 }
 
 static int	mouse_hook(int button, int xx, int yy, void **params)
