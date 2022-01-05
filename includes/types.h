@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:53:33 by jmaia             #+#    #+#             */
-/*   Updated: 2022/01/05 15:04:24 by jmaia            ###   ########.fr       */
+/*   Updated: 2022/01/05 15:44:00 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 typedef enum e_fractal_type
 {
 	mandelbrot,
-	julia
+	julia,
+	mega_mandelbrot
 }	t_fractal_type;
 
 typedef struct s_fract_data

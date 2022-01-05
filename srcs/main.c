@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:47:02 by jmaia             #+#    #+#             */
-/*   Updated: 2021/12/17 12:47:24 by jmaia            ###   ########.fr       */
+/*   Updated: 2022/01/05 15:47:03 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	are_args_valid(int ac, char **av)
 		return (0);
 	if (!ft_strncmp(av[1], "mandelbrot", 11))
 		return (1);
+	if (!ft_strncmp(av[1], "mega_mandelbrot", 11))
+		return (1);
 	if (!ft_strncmp(av[1], "julia", 6))
 	{
 		if (ac < 4)
@@ -49,6 +51,7 @@ static void	print_help(void)
 	ft_putendl_fd("--- Available parameters ---", 2);
 	ft_putendl_fd("• mandelbrot", 2);
 	ft_putendl_fd("• julia Re(C) Im(C)", 2);
+	ft_putendl_fd("• mega_mandelbrot", 2);
 	ft_putendl_fd("----------------------------", 2);
 }
 
