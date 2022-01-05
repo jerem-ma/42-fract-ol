@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:09:51 by jmaia             #+#    #+#             */
-/*   Updated: 2022/01/05 14:59:32 by jmaia            ###   ########.fr       */
+/*   Updated: 2022/01/05 15:08:39 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	init_fract_data(t_fract_data *data, char **av)
 	}
 	data->min = (t_complex){.x = -2, .y = -2};
 	data->max = (t_complex){.x = 2, .y = 2};
+	data->color_shift = 0;
 }
 
 static int	key_hook(int keycode, void **params)
@@ -71,6 +72,11 @@ static int	key_hook(int keycode, void **params)
 	}
 	else if (keycode >= LEFT_KEY && keycode <= DOWN_KEY)
 		move(keycode, data, mlx_bp);
+	else if (keycode == COLOR_SHIFT_KEY)
+	{
+		data->color_shift++;
+		draw_fractal(mlx_bp, data);
+	}
 	return (0);
 }
 
