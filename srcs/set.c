@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 13:50:55 by jmaia             #+#    #+#             */
-/*   Updated: 2022/01/05 13:39:24 by jmaia            ###   ########.fr       */
+/*   Updated: 2022/01/05 13:42:33 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	fill_set(t_shiny *set, t_complex *pts, int length,
 	t_shiny		julie;
 	t_complex	z0;
 
-	z0 = (t_complex) {.x = 0, .y = 0};
+	z0 = (t_complex){.x = 0, .y = 0};
 	i = 0;
 	while (i < length)
 	{
