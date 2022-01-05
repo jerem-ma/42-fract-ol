@@ -6,14 +6,14 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:37 by jmaia             #+#    #+#             */
-/*   Updated: 2022/01/05 13:13:52 by jmaia            ###   ########.fr       */
+/*   Updated: 2022/01/05 13:40:37 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
 
 #include "shiny.h"
-#include "julia_set.h"
+#include "set.h"
 
 static void	fill_pts(t_complex pts[], t_fract_data *data, int width,
 				int height);
@@ -22,14 +22,6 @@ static void	clean_set_and_image(void *set, void *image, void *mlx_ptr);
 
 void	draw_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 {
-	if (fract_data->type == mandelbrot)
-		;
-	else if (fract_data->type == julia)
-		draw_julia_fractal(mlx_bp, fract_data);
-}
-
-void	draw_julia_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
-{
 	t_complex	screen;
 	void		*image;
 	int			*buffer;
@@ -37,7 +29,7 @@ void	draw_julia_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 	t_complex	pts[SIZE * SIZE];
 
 	fill_pts(pts, fract_data, SIZE, SIZE);
-	set = get_julia_set(pts, SIZE * SIZE, fract_data->c);
+	set = get_set(pts, SIZE * SIZE, fract_data);
 	screen.y = 0;
 	image = mlx_new_image(mlx_bp->mlx_ptr, SIZE, SIZE);
 	buffer = (int *)mlx_get_data_addr(image, (int *)&screen.x,
