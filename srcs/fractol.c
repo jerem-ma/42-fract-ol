@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:09:51 by jmaia             #+#    #+#             */
-/*   Updated: 2022/01/05 15:08:39 by jmaia            ###   ########.fr       */
+/*   Updated: 2022/01/05 15:53:32 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,16 @@ int	start_fractol(char **av)
 
 static void	init_fract_data(t_fract_data *data, char **av)
 {
-	if (!ft_strncmp(av[1], "mandelbrot", 11))
-		data->type = mandelbrot;
-	else if (!ft_strncmp(av[1], "julia", 6))
+	if (!ft_strncmp(av[1], "julia", 6))
 	{
 		data->type = julia;
 		data->c.x = parse_double(av[2]);
 		data->c.y = parse_double(av[3]);
 	}
+	else if (!ft_strncmp(av[1], "mandelbrot", 10))
+		data->type = mandelbrot;
+	else
+		data->type = mega_mandelbrot;
 	data->min = (t_complex){.x = -2, .y = -2};
 	data->max = (t_complex){.x = 2, .y = 2};
 	data->color_shift = 0;

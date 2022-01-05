@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 13:50:55 by jmaia             #+#    #+#             */
-/*   Updated: 2022/01/05 13:42:33 by jmaia            ###   ########.fr       */
+/*   Updated: 2022/01/05 15:55:34 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_shiny	*get_set(t_complex *pts, int length, t_fract_data *data)
 	return (set);
 }
 
+#include <stdio.h>
+
 static void	fill_set(t_shiny *set, t_complex *pts, int length,
 		t_fract_data *data)
 {
@@ -39,9 +41,11 @@ static void	fill_set(t_shiny *set, t_complex *pts, int length,
 	{
 		julie.nbr = pts[i];
 		if (data->type == mandelbrot)
-			julie.value = get_sequence_speed(z0, pts[i]);
+			julie.value = get_sequence_speed(z0, pts[i], 0);
 		else if (data->type == julia)
-			julie.value = get_sequence_speed(pts[i], data->c);
+			julie.value = get_sequence_speed(pts[i], data->c, 0);
+		else if (data->type == mega_mandelbrot)
+			julie.value = get_sequence_speed(z0, pts[i], 1);
 		set[i] = julie;
 		i++;
 	}
