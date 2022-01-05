@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:37 by jmaia             #+#    #+#             */
-/*   Updated: 2022/01/05 13:40:37 by jmaia            ###   ########.fr       */
+/*   Updated: 2022/01/05 15:16:03 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,44 @@
 
 static void	fill_pts(t_complex pts[], t_fract_data *data, int width,
 				int height);
-static int	get_color(int speed);
+static int	get_color(int speed, int shift);
 static void	clean_set_and_image(void *set, void *image, void *mlx_ptr);
+static void	fill_image(void *image, t_shiny *set, t_fract_data *fract_data);
 
 void	draw_fractal(t_mlx_backpack *mlx_bp, t_fract_data *fract_data)
 {
-	t_complex	screen;
 	void		*image;
-	int			*buffer;
 	t_shiny		*set;
 	t_complex	pts[SIZE * SIZE];
 
 	fill_pts(pts, fract_data, SIZE, SIZE);
 	set = get_set(pts, SIZE * SIZE, fract_data);
-	screen.y = 0;
 	image = mlx_new_image(mlx_bp->mlx_ptr, SIZE, SIZE);
-	buffer = (int *)mlx_get_data_addr(image, (int *)&screen.x,
-			(int *)&screen.x, (int *)&screen.x);
+	fill_image(image, set, fract_data);
+	mlx_put_image_to_window(mlx_bp->mlx_ptr, mlx_bp->window_ptr, image, 0, 0);
+	clean_set_and_image(set, image, mlx_bp->mlx_ptr);
+}
+
+static void	fill_image(void *image, t_shiny *set, t_fract_data *fract_data)
+{
+	int			junk;
+	int			*buffer;
+	t_complex	screen;
+
+	buffer = (int *)mlx_get_data_addr(image, &junk, &junk, &junk);
+	screen.y = 0;
 	while (screen.y < SIZE)
 	{
 		screen.x = 0;
 		while (screen.x < SIZE)
 		{
 			buffer[(int)(screen.y * SIZE + screen.x)] = get_color(
-					set[(int)(screen.y * SIZE + screen.x)].value);
+					set[(int)(screen.y * SIZE + screen.x)].value,
+					fract_data->color_shift);
 			screen.x++;
 		}
 		screen.y++;
 	}
-	mlx_put_image_to_window(mlx_bp->mlx_ptr, mlx_bp->window_ptr, image, 0, 0);
-	clean_set_and_image(set, image, mlx_bp->mlx_ptr);
 }
 
 static void	clean_set_and_image(void *set, void *image, void *mlx_ptr)
@@ -76,12 +84,13 @@ static void	fill_pts(t_complex *pts, t_fract_data *data, int width, int height)
 	}
 }
 
-static int	get_color(int speed)
+static int	get_color(int speed, int shift)
 {
 	int	color;
 
 	if (speed == -1)
 		return (0xFF000000);
+	speed += shift;
 	color = 0;
 	if (speed % 60 < 20)
 	{
