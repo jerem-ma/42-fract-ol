@@ -6,7 +6,7 @@
 /*   By: jmaia <jmaia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:09:51 by jmaia             #+#    #+#             */
-/*   Updated: 2022/01/05 14:58:19 by jmaia            ###   ########.fr       */
+/*   Updated: 2022/01/05 14:59:32 by jmaia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	init_fract_data(t_fract_data *data, char **av)
 
 static int	key_hook(int keycode, void **params)
 {
-	t_mlx_backpack *mlx_bp;
+	t_mlx_backpack	*mlx_bp;
 	t_fract_data	*data;
 
 	mlx_bp = params[0];
